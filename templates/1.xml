@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<posts>
+  {% for post in query %}
+  <post>
+    <date>{{ post.date|date:"M j, Y" }}</date>
+ 
+    <edited>{{ post.time}}</edited>
+   
+    <title>{{ post.speed }}</title>
+    <body>{{ post.description }}</body>
+  </post>
+  {% endfor %}
+</posts>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="text-center font-bold">
+     <center> <h1 >Welcome to our System</h1></center>
+  </div>
+
+{% if msg%}
+  <div>
+    <span class="font-medium">{{msg}}</span> 
+</div>
+{%endif%}
+  <form class="bg-white  p-4 rounded " method="POST" >
+
+    {% csrf_token %}
+
+    <div class="rounded px-8 pt-6 pb-8 mb-2 flex flex-col my-2 md:mr-12">
+        
+        <div class="-mx-3 md:flex mb-2 ">
+          <div class="md:w-1/2 px-3 mb-2 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+              Speed
+            </label>
+            <input type="text" name="speed" class="capitalize appearance-none block w-full bg-grey-lighter text-gray-700 border-2 border-gray-500  rounded py-2 px-4 mb-3"  />
+          </div>
+          <div class="md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+              Time
+            </label>
+                
+            <input type="time" name="time" class="capitalize appearance-none block w-full bg-grey-lighter text-gray-700 border-2 border-gray-500  rounded py-2 px-4 mb-3"  />
+            
+            </div>
+
+            <div class="md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Date
+                </label>
+                    
+                <input type="date" name="date" class="capitalize appearance-none block w-full bg-grey-lighter text-gray-700 border-2 border-gray-500  rounded py-2 px-4 mb-3"  />
+                
+                </div>
+
+                <div class="md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                      Distance
+                    </label>
+                        
+                    <input type="text" name="distance" class="capitalize appearance-none block w-full bg-grey-lighter text-gray-700 border-2 border-gray-500  rounded py-2 px-4 mb-3"  />
+                    
+                    </div>
+        </div>
+      
+    
+        <div class="-mx-3 md:flex mb-4">
+            <div class="md:w-full px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                Description
+              </label>
+              <textarea name="desc" class="appearance-none block w-full bg-grey-lighter text-gray-700 border-2 border-gray-500  mb-3 h-32 rounded">      
+            </textarea>
+            
+            </div>
+        </div>
+
+    
+          <div class="-mx-3 md:flex justify-center">
+            <div class="item-center">
+             <button class=" justify-center bg-gray-700 text-white  hover:bg-gray-500 hover:text-white rounded  font-semibold py-2 px-4 ">Submit</a>
+             
+            
+            </div>
+          </div>
+        
+        
+        </div>
+
+
+
+</form>
+
+<div class="flex justify-center mb-4">
+    <center>
+        <a href="{% url 'csv'%}">
+            <button class="bg-blue-600 rounded-md p-4 text-white">Report CSV</button>
+        </a>
+   
+
+
+        <a href="{% url 'xml'%}">
+            <button class="bg-indigo-600 rounded-md p-4 text-white">Report XML</button>
+        </a>
+    </center>
+</div>
+
+
+
+<table class="text-left w-full">
+    <thead class="bg-black flex text-white w-full">
+        <tr class="flex w-full mb-4">
+            <th class="p-4 w-1/6">id</th>
+            <th class="p-4 w-1/6">Speed</th>
+            <th class="p-4 w-1/6">Time</th>
+            <th class="p-4 w-1/6">Date</th>
+            <th class="p-4 w-1/6">Distance</th>
+            <th class="p-4 w-1/6">Description</th>
+        </tr>
+    </thead>
+<!-- Remove the nasty inline CSS fixed height on production and replace it with a CSS class — this is just for demonstration purposes! -->
+    <tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" >
+       {%for item in query%}
+       
+        <tr class="flex w-full mb-1">
+            <td class="p-4 w-1/6">{{item.id}}</td>
+            <td class="p-4 w-1/6">{{item.speed}}</td>
+            <td class="p-4 w-1/6">{{item.time}}</td>
+            <td class="p-4 w-1/6">{{item.date}}</td>
+            <td class="p-4 w-1/6">{{item.distance}}</td>
+            <td class="p-4 w-1/6">{{item.description}}</td>
+        </tr>
+  {%endfor%}
+    </tbody>
+</table>
+</div>
+
+</body>
+</html>
